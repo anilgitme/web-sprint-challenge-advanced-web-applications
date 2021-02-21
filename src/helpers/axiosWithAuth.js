@@ -3,11 +3,14 @@ import axios from "axios";
 //Task List:
 //Build and export a function used to send in our authorization token
 
-export const axiosWithAuth = () => {
+const axiosWithAuth = () => {
     const token = localStorage.getItem('token');
+    console.log('axiosWithAuth', token);
     return axios.create({
         headers: {
             Authorization: token
         }
     })
 }
+
+export default axiosWithAuth;
