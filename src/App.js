@@ -18,4 +18,4 @@ export default App;
 
 //Task List:
 //1. Render BubblePage as a PrivateRoute
-const name = 'anil'
+const name = 'anilr'
