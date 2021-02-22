@@ -1,16 +1,44 @@
 import React from "react";
-import { render, screen } from "@testing-library/react";
+import { render, screen, waitFor } from "@testing-library/react";
 import BubblePage from "./BubblePage";
+import {getColors as mockColors} from '../helpers/getColors';
+
+jest.mock('../helpers/getColors')
+
+const colors = [
+  {
+    color: "aqua",
+    code: {
+      hex: "#00ffff",
+    },
+    id: 3,
+  },
+  {
+    color: "aquamarine",
+    code: {
+      hex: "#7fffd4",
+    },
+    id: 4,
+  },
+]
 
 test("Renders BubblePage without errors", () => {
+  mockColors.mockResolvedValueOnce({data: colors})
   render(<BubblePage />)
 });
 
-test("Fetches data and renders the bubbles on mounting", () => {
+test("Fetches data and renders the bubbles on mounting", async () => {
   // Finish this test
+  mockColors.mockResolvedValueOnce({data: colors})
   render(<BubblePage />)
-  const colorTest = screen.findByText(/aqua/i)
-  expect(colorTest).toBeInTheDocument()
+  await waitFor(() => {
+    const colorTest = screen.getAllByText(/aqua/i)
+    // console.log(colorTest)
+   expect(colorTest).toHaveLength(2)
+  })
+  screen.debug()
+  // const colorTest = screen.getByText(/aqua/i)
+  // expect(colorTest).toBeInTheDocument()
 });
 
 //Task List
