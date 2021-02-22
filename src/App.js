@@ -8,8 +8,8 @@ import "./styles.scss";
 
 function App() {
   const logout = () => {
-    axiosWithAuth().post('#')
-      .catch(error => console.log('unable to logout'));
+    axiosWithAuth().post('/login')
+      .catch(error => console.log('unable to logout', error));
       localStorage.removeItem('token');
   }
   return (

@@ -36,16 +36,21 @@ const ColorList = ({ colors, updateColors }) => {
 
   const deleteColor = color => {
     axiosWithAuth()
-    .delete(`http://localhost:5000/api/colors/${colorToEdit.id}`)
-    .then(result => {
-      updateColors(colors.filter((color) => color.id !== result.data))
+    .delete(`http://localhost:5000/api/colors/${color.id}`)
+    .then((result) => {
+      updateColors(
+        colors.filter((hex) => {
+          return hex.id !== color.id
+        })
+      )
     })
-    .catch(error => console.log(error, 'cant delete'))
+    .catch((error) => console.log(error, 'cant delete'))
+    
   };
 
   return (
     <div className="colors-wrap">
-      <p>colors</p>
+      <h3>colors</h3>
       <ul>
         {colors.map(color => (
           <li key={color.color} onClick={() => editColor(color)}>
